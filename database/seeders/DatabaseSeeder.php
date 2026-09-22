@@ -18,13 +18,31 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             RoleSeeder::class,
+            CatalogSeeder::class,
         ]);
 
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => bcrypt('password'),
         ]);
 
         $user->assignRole('admin');
+
+        $kasir = User::factory()->create([
+            'name' => 'Kasir Demo',
+            'email' => 'kasir@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $kasir->assignRole('kasir');
+
+        $customer = User::factory()->create([
+            'name' => 'Customer Demo',
+            'email' => 'customer@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $customer->assignRole('customer');
     }
 }
