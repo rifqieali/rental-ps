@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->enum('type', ['PS3', 'PS4', 'PS5']);
             $table->string('room');
             $table->enum('status', ['available', 'occupied', 'maintenance']);

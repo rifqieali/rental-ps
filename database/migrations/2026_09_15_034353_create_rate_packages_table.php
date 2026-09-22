@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,11 +16,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->string('name');
-            $table->decimal('price', 10, 2);
-            $table->integer('duration_minutes');
+            $table->unsignedInteger('price');
+            $table->unsignedInteger('duration_minutes')->default(60);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->unique(['unit_id', 'name']);
         });
+
+        DB::statement('ALTER TABLE rate_packages ADD CONSTRAINT chk_price CHECK (price >= 1)');
+        DB::statement('ALTER TABLE rate_packages ADD CONSTRAINT chk_duration_minutes CHECK (duration_minutes >= 1)');
     }
 
     /**
