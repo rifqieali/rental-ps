@@ -1,0 +1,87 @@
+[
+  {
+    "name": "PS3-01",
+    "type": "PS3",
+    "room": "Reguler",
+    "status": "available",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 5000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 12000, "duration_minutes": 180, "is_active": true },
+      { "name": "Hemat 5 Jam", "price": 18000, "duration_minutes": 300, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS3-02",
+    "type": "PS3",
+    "room": "Reguler",
+    "status": "occupied",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 5000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 12000, "duration_minutes": 180, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS4-01",
+    "type": "PS4",
+    "room": "Reguler",
+    "status": "available",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 8000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 20000, "duration_minutes": 180, "is_active": true },
+      { "name": "Paket Begadang (6 Jam)", "price": 35000, "duration_minutes": 360, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS4-02",
+    "type": "PS4",
+    "room": "Reguler",
+    "status": "available",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 8000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 20000, "duration_minutes": 180, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS4-VIP-01",
+    "type": "PS4",
+    "room": "VIP",
+    "status": "occupied",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 12000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 30000, "duration_minutes": 180, "is_active": true },
+      { "name": "Paket Begadang (6 Jam)", "price": 50000, "duration_minutes": 360, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS5-VIP-01",
+    "type": "PS5",
+    "room": "VIP",
+    "status": "available",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 15000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 38000, "duration_minutes": 180, "is_active": true },
+      { "name": "Paket Sultan 5 Jam", "price": 60000, "duration_minutes": 300, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS5-VIP-02",
+    "type": "PS5",
+    "room": "VIP",
+    "status": "maintenance",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 15000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 38000, "duration_minutes": 180, "is_active": true }
+    ]
+  },
+  {
+    "name": "PS5-VVIP-01",
+    "type": "PS5",
+    "room": "VVIP",
+    "status": "available",
+    "packages": [
+      { "name": "Reguler 1 Jam", "price": 25000, "duration_minutes": 60, "is_active": true },
+      { "name": "Hemat 3 Jam", "price": 65000, "duration_minutes": 180, "is_active": true },
+      { "name": "All Day VVIP (8 Jam)", "price": 150000, "duration_minutes": 480, "is_active": true }
+    ]
+  }
+]

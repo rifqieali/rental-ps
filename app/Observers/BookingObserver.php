@@ -17,6 +17,10 @@ class BookingObserver
 
     public function saving(Booking $booking): void
     {
+        if ($booking->exists && ! $booking->isDirty(['rate_package_id', 'start_at', 'end_at'])) {
+            return;
+        }
+
         if (empty($booking->rate_package_id) || empty($booking->start_at) || empty($booking->end_at)) {
             return;
         }

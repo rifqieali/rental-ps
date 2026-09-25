@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\RatePackage;
 use App\Models\Unit;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class CatalogSeeder extends Seeder
 {
@@ -14,38 +15,8 @@ class CatalogSeeder extends Seeder
      */
     public function run(): void
     {
-        $catalog = [
-            [
-                'name' => 'PS3-01',
-                'type' => 'PS3',
-                'room' => 'Reguler',
-                'status' => 'available',
-                'packages' => [
-                    ['name' => 'Reguler 1 Jam', 'price' => 5000, 'duration_minutes' => 60, 'is_active' => true],
-                    ['name' => 'Hemat 3 Jam', 'price' => 12000, 'duration_minutes' => 180, 'is_active' => true],
-                ],
-            ],
-            [
-                'name' => 'PS4-01',
-                'type' => 'PS4',
-                'room' => 'Reguler',
-                'status' => 'available',
-                'packages' => [
-                    ['name' => 'Reguler 1 Jam', 'price' => 8000, 'duration_minutes' => 60, 'is_active' => true],
-                    ['name' => 'Hemat 3 Jam', 'price' => 20000, 'duration_minutes' => 180, 'is_active' => true],
-                ],
-            ],
-            [
-                'name' => 'PS5-VIP-01',
-                'type' => 'PS5',
-                'room' => 'VIP',
-                'status' => 'available',
-                'packages' => [
-                    ['name' => 'Reguler 1 Jam', 'price' => 15000, 'duration_minutes' => 60, 'is_active' => true],
-                    ['name' => 'Hemat 3 Jam', 'price' => 38000, 'duration_minutes' => 180, 'is_active' => true],
-                ],
-            ],
-        ];
+        $json = File::get(database_path('data/catalogs.json'));
+        $catalog = json_decode($json, true);
 
         foreach ($catalog as $unitData) {
             $unit = Unit::updateOrCreate(
