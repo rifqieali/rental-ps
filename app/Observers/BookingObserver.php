@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Booking;
 use App\Models\RatePackage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class BookingObserver
 {
@@ -17,6 +18,8 @@ class BookingObserver
 
     public function saving(Booking $booking): void
     {
+        $this->guardNoOverlap($booking);
+
         if ($booking->exists && ! $booking->isDirty(['rate_package_id', 'start_at', 'end_at'])) {
             return;
         }
@@ -38,5 +41,39 @@ class BookingObserver
         }
 
         $booking->total_price = ceil($menit / $paket->duration_minutes) * $paket->price;
+    }
+
+    private function guardNoOverlap(Booking $booking): void
+    {
+        if (empty($booking->unit_id) || empty($booking->start_at) || empty($booking->end_at)) {
+            return;
+        }
+
+        if (! in_array($booking->status ?? 'pending', ['pending', 'confirmed', 'paid'], true)) {
+            return;
+        }
+
+        if ($booking->exists && ! $booking->isDirty(['unit_id', 'start_at', 'end_at', 'status'])) {
+            return;
+        }
+
+        if ($booking->end_at <= $booking->start_at) {
+            throw ValidationException::withMessages([
+                'end_at' => 'Jam akhir harus sesudah dari jam mulai.',
+            ]);
+        }
+
+        $overlap = Booking::where('unit_id', $booking->unit_id)
+            ->whereIn('status', ['pending', 'confirmed', 'paid'])
+            ->where('start_at', '<', $booking->end_at)
+            ->where('end_at', '>', $booking->start_at)
+            ->when($booking->exists, fn ($query) => $query->where('id', '!=', $booking->id))
+            ->exists();
+
+        if ($overlap) {
+            throw ValidationException::withMessages([
+                'start_at' => 'Slot sudah terisi di unit ini.',
+            ]);
+        }
     }
 }

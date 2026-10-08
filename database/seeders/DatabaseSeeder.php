@@ -3,13 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
@@ -18,7 +15,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             RoleSeeder::class,
-            CatalogSeeder::class,
         ]);
 
         $user = User::factory()->create([
@@ -44,5 +40,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $customer->assignRole('customer');
+
+        $this->call([
+            CatalogSeeder::class,
+            BookingDemoSeeder::class,
+        ]);
     }
 }
